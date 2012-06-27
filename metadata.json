@@ -1,0 +1,171 @@
+{
+  "name": "chef-rbenv",
+  "description": "Manages rbenv and its installed rubies. Several LWRPs are also defined.",
+  "long_description": "Please refer to README.md (it's long).",
+  "maintainer": "Fletcher Nichol",
+  "maintainer_email": "fnichol@nichol.ca",
+  "license": "Apache 2.0",
+  "platforms": {
+    "ubuntu": ">= 0.0.0",
+    "debian": ">= 0.0.0",
+    "freebsd": ">= 0.0.0",
+    "redhat": ">= 0.0.0",
+    "centos": ">= 0.0.0",
+    "fedora": ">= 0.0.0",
+    "amazon": ">= 0.0.0",
+    "scientific": ">= 0.0.0",
+    "suse": ">= 0.0.0",
+    "mac_os_x": ">= 0.0.0"
+  },
+  "dependencies": {
+  },
+  "recommendations": {
+    "ruby_build": ">= 0.0.0",
+    "java": "> 1.4.0"
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+    "rbenv": {
+      "display_name": "rbenv hash",
+      "description": "Hash of rbenv attributes.",
+      "type": "hash",
+      "choice": [
+
+      ],
+      "calculated": false,
+      "required": "optional",
+      "recipes": [
+
+      ]
+    },
+    "rbenv/git_url": {
+      "display_name": "git_url",
+      "description": "The Git URL which is used to install rbenv.",
+      "default": "git://github.com/sstephenson/rbenv.git",
+      "choice": [
+
+      ],
+      "calculated": false,
+      "type": "string",
+      "required": "optional",
+      "recipes": [
+
+      ]
+    },
+    "rbenv/git_ref": {
+      "display_name": "git_ref",
+      "description": "A specific Git branch/tag/reference to use when installing rbenv. For example, to pin rbenv to a specific release",
+      "default": "master",
+      "choice": [
+
+      ],
+      "calculated": false,
+      "type": "string",
+      "required": "optional",
+      "recipes": [
+
+      ]
+    },
+    "rbenv/upgrade": {
+      "display_name": "upgrade",
+      "description": "Determines how to handle installing updates to the rbenv. There are currently 2 valid values: none or sync.",
+      "default": "none",
+      "choice": [
+
+      ],
+      "calculated": false,
+      "type": "string",
+      "required": "optional",
+      "recipes": [
+
+      ]
+    },
+    "rbenv/root_path": {
+      "display_name": "root_path",
+      "description": "The path prefix to rbenv in a system-wide installation.",
+      "default": "/usr/local/rbenv",
+      "choice": [
+
+      ],
+      "calculated": false,
+      "type": "string",
+      "required": "optional",
+      "recipes": [
+
+      ]
+    },
+    "rbenv/rubies": {
+      "display_name": "rubies",
+      "description": "A list of additional system-wide rubies to be built and installed using the ruby_build cookbook. You must include recipe[ruby_build] in your run_list for the rbenv_ruby LWRP to work properly.",
+      "default": "[]",
+      "choice": [
+
+      ],
+      "calculated": false,
+      "type": "string",
+      "required": "optional",
+      "recipes": [
+
+      ]
+    },
+    "rbenv/user_rubies": {
+      "display_name": "user_rubies",
+      "description": "A list of additional system-wide rubies to be built and installed (using the ruby_build cookbook) per-user when not explicitly set.",
+      "default": "[]",
+      "choice": [
+
+      ],
+      "calculated": false,
+      "type": "string",
+      "required": "optional",
+      "recipes": [
+
+      ]
+    },
+    "rbenv/gems": {
+      "display_name": "gems",
+      "description": "A hash of gems to be installed into arbitrary rbenv-managed rubies system wide. See the rbenv_gem resource for more details about the options for each gem hash and target Ruby environment.",
+      "type": "hash",
+      "default": "{}",
+      "choice": [
+
+      ],
+      "calculated": false,
+      "required": "optional",
+      "recipes": [
+
+      ]
+    },
+    "rbenv/user_gems": {
+      "display_name": "user_gems",
+      "description": "A hash of gems to installed into arbitrary rbenv-managed rubies for each user when not explicitly set. See the rbenv_gem resource for more details about the options for each gem hash and target Ruby environment.",
+      "type": "hash",
+      "default": "{}",
+      "choice": [
+
+      ],
+      "calculated": false,
+      "required": "optional",
+      "recipes": [
+
+      ]
+    }
+  },
+  "groupings": {
+  },
+  "recipes": {
+    "rbenv": "Installs the rbenv gem and initializes Chef to use the Lightweight Resources and Providers (LWRPs). Use this recipe explicitly if you only want access to the LWRPs provided.",
+    "system_install": "Installs the rbenv codebase system-wide (that is, into /usr/local/rbenv). This recipe includes default. Use this recipe by itself if you want rbenv installed system-wide but want to handle installing Rubies, invoking LWRPs, etc.",
+    "system": "Installs the rbenv codebase system-wide (that is, into /usr/local/rbenv) and installs rubies driven off attribute metadata. This recipe includes default and system_install. Use this recipe by itself if you want rbenv installed system-wide with rubies installed.",
+    "user_install": "Installs the rbenv codebase for a list of users (selected from the node['rbenv']['user_installs'] hash). This recipe includes default. Use this recipe by itself if you want rbenv installed for specific users in isolation but want each user to handle installing Rubies, invoking LWRPs, etc.",
+    "user": "Installs the rbenv codebase for a list of users (selected from the node['rbenv']['user_installs'] hash) and installs rubies driven off attribte metadata. This recipe includes default and user_install. Use this recipe by itself if you want rbenv installed for specific users in isolation with rubies installed."
+  },
+  "version": "0.6.11"
+}
